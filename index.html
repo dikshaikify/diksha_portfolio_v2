@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diksha Koppad | AI & Data Engineer Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #020617;
+            color: white;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        body.light {
+            background: #f4f4f4;
+            color: #0f172a;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h3 { color: #38bdf8; font-size: 1.5rem; }
+
+        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+
+        nav a { text-decoration: none; color: white; font-weight: 500; transition: 0.3s; }
+        body.light nav a { color: #333; }
+        nav a:hover { color: #38bdf8; }
+
+        #themeToggle {
+            cursor: pointer;
+            background: #1e293b;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .hero-text h1 { font-size: 50px; }
+        .hero-text span { color: #38bdf8; }
+
+        .typing {
+            color: #38bdf8;
+            font-size: 24px;
+            height: 40px;
+            margin: 10px 0;
+        }
+
+        .hero img.profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid #38bdf8;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        section { padding: 80px 10%; max-width: 1200px; margin: auto; }
+
+        h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; color: #38bdf8; }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: #111827;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
+        }
+        body.light .skill-box { background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+        .bar { background: #1e293b; height: 8px; border-radius: 10px; margin-top: 8px; }
+        .progress { background: #38bdf8; height: 100%; border-radius: 10px; }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #111827;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid #1e293b;
+        }
+        body.light .project-card { background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .project-card img { width: 100%; height: 200px; object-fit: cover; }
+
+        .project-info { padding: 20px; }
+
+        .timeline { border-left: 3px solid #38bdf8; padding-left: 30px; margin-left: 20px; }
+        .timeline-item { margin-bottom: 40px; position: relative; display: flex; gap: 20px; align-items: flex-start; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: #38bdf8;
+            border-radius: 50%;
+        }
+        .timeline-item img { width: 60px; border-radius: 8px; background: white; padding: 5px; }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .cert-card {
+            background: #111827;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #1e293b;
+        }
+        .cert-card a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+
+        .profiles { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        .profiles a { text-align: center; text-decoration: none; color: inherit; width: 100px; }
+        .profiles img { width: 60px; height: 60px; padding: 10px; background: white; border-radius: 12px; transition: 0.3s; }
+        .profiles img:hover { transform: translateY(-5px); }
+
+        .repo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .repo-card { background: #1e293b; padding: 20px; border-radius: 12px; border-bottom: 4px solid #38bdf8; }
+
+        footer { text-align: center; padding: 40px; background: #020617; border-top: 1px solid #1e293b; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 50px; }
+            .hero-text h1 { font-size: 32px; }
+            .skills-container { grid-template-columns: 1fr; }
+            nav { padding: 15px 5%; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <h3>Diksha Koppad</h3>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button id="themeToggle">🌙</button></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Hi, I'm <span>Diksha Koppad</span></h1>
+            <div class="typing" id="typing"></div>
+            <p>Computer Science Engineering Student | ML & Data Analysis Specialist</p>
+            
+            <div style="margin-top: 25px;">
+                <a href="resume.doc" class="btn" download style="background:#38bdf8; color:#020617; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600; display:inline-block; transition:0.3s;">
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+            </div>
+        </div>
+        <img src="https://i.imgur.com/6VBx3io.png" alt="Diksha" class="profile-img" onerror="this.src='swayamdiksha.jpg'">
+    </section>
+
+    <section id="about">
+        <h2>Building Intelligent Systems with Precision & Passion</h2>
+        <div style="text-align: center; line-height: 1.8; max-width: 850px; margin: auto;">
+            <p>
+                I am an aspiring <b>Machine Learning & Data Analysis Engineer</b> currently pursuing my degree at 
+                <b>Visvesvaraya Technological University.</b>. I focus on turning complex datasets into 
+                actionable insights and building predictive models that solve real-world challenges.
+            </p>
+            <p style="margin-top: 20px;">
+                I believe powerful AI solutions are built on a foundation of rigorous logic. By maintaining an 
+                <b>8.58 CGPA</b> and mastering over <b>600+ algorithmic challenges</b> on platforms like LeetCode, 
+                I focus on <b>computational efficiency and scalability</b>—ensuring my models are mathematically sound and production-ready.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Expertise</h2>
+        <div class="skills-container">
+            <div class="skills-grid">
+                <div class="skill-box">Python (NumPy/Pandas) <div class="bar"><div class="progress" style="width:95%"></div></div></div>
+                <div class="skill-box">Machine Learning <div class="bar"><div class="progress" style="width:88%"></div></div></div>
+                <div class="skill-box">Deep Learning <div class="bar"><div class="progress" style="width:82%"></div></div></div>
+                <div class="skill-box">Data Visualization <div class="bar"><div class="progress" style="width:90%"></div></div></div>
+                <div class="skill-box">SQL <div class="bar"><div class="progress" style="width:85%"></div></div></div>
+                <div class="skill-box">C++ (DSA) <div class="bar"><div class="progress" style="width:90%"></div></div></div>
+            </div>
+            <div>
+                <canvas id="skillChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+    <h2>Machine Learning & Analysis Projects</h2>
+    <div class="projects-grid">
+        <div class="project-card" data-tilt>
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" 
+                 alt="Hate Speech Detection" 
+                 onerror="this.src='https://placehold.co/600x400/111827/38bdf8?text=Hate+Speech+Detection'">
+            <div class="project-info">
+                <h3>Hate Speech Detection</h3>
+                <p>An NLP-based classification model designed to identify and filter offensive content in social media feeds.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-tilt>
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
+                 alt="Student Score Prediction" 
+                 onerror="this.src='https://placehold.co/600x400/111827/38bdf8?text=Score+Prediction'">
+            <div class="project-info">
+                <h3>Student Score Prediction</h3>
+                <p>Regression analysis model that predicts academic performance based on historical data and study habits.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-tilt>
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" 
+                 alt="SMS Scam Detection" 
+                 onerror="this.src='https://placehold.co/600x400/111827/38bdf8?text=SMS+Scam+Detection'">
+            <div class="project-info">
+                <h3>SMS Scam Detection</h3>
+                <p>Utilizing statistical modeling to distinguish between legitimate communication and fraudulent spam messages.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-tilt>
+            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=800&q=80" 
+                 alt="AI Chatbot" 
+                 onerror="this.src='https://placehold.co/600x400/111827/38bdf8?text=AI+Chatbot'">
+            <div class="project-info">
+                <h3>Conversational AI</h3>
+                <p>A sophisticated NLP project focused on building context-aware chatbots for enhanced user interaction.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-tilt>
+            <img src="https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&fit=crop&w=800&q=80" 
+                 alt="Data Analysis" 
+                 onerror="this.src='https://placehold.co/600x400/111827/38bdf8?text=Data+Analysis'">
+            <div class="project-info">
+                <h3>Market Data Analysis</h3>
+                <p>Python-driven exploration of large-scale datasets to extract meaningful trends and visual insights.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png">
+                <div>
+                    <h3>Nagarjuna College of Engineering (VTU)</h3>
+                    <p>2023 - 2027 | Current CGPA: 8.58</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3976/3976626.png">
+                <div>
+                    <h3>Devika PU College</h3>
+                    <p>2022 - 2023 | 88%</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+                <div>
+                    <h3>BES High School</h3>
+                    <p>2018 - 2021 | 88.96%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <h2>Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-card"><h3>Infosys Springboard</h3><p>Generative AI</p><a href="a0abd2e7-b312-41b3-8034-0bb328303137.pdf">View PDF</a></div>
+            <div class="cert-card"><h3>GeeksForGeeks</h3><p>Gen AI, LLM & RAG</p></div>
+            <div class="cert-card"><h3>HashGraph</h3><p>Developer Certification</p><a href="1a49fe5e-7227-4aee-bc40-fe510b01fa31.pdf">View PDF</a></div>
+            <div class="cert-card"><h3>LetsUpgrade</h3><p>Python Programming</p><a href="LUEPYTMAR1253586.pdf">View PDF</a></div>
+            <div class="cert-card"><h3>LetsUpgrade</h3><p>MySQL</p><a href="LUEMYSQLAPR125858.pdf">View PDF</a></div>
+            <div class="cert-card"><h3>LetsUpgrade</h3><p>NodeJS</p></div>
+        </div>
+    </section>
+
+    <section id="github-projects">
+        <h2>Live GitHub Repositories</h2>
+        <div id="repo-container" class="repo-grid"></div>
+    </section>
+
+    <section>
+        <h2>Algorithm & Analytics Stats</h2>
+        <div style="text-align: center;">
+            <img src="https://github-readme-activity-graph.vercel.app/graph?username=dikshaikify&theme=react-dark" width="100%" style="margin-bottom: 20px; border-radius: 10px;">
+            <img src="https://leetcard.jacoblin.cool/nPOZbiKXEZ?theme=dark&font=Poppins" width="100%" style="border-radius: 10px;">
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Let's Connect</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: start;">
+            <div>
+                <div class="profiles">
+                    <a href="https://github.com/dikshaikify" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png"><p>GitHub</p></a>
+                    <a href="https://leetcode.com/u/nPOZbiKXEZ/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"><p>LeetCode</p></a>
+                    <a href="https://www.geeksforgeeks.org/profile/dikshak4dcg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg"><p>GFG</p></a>
+                    <a href="https://www.hackerrank.com/profile/dikshakoppad" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png"><p>HackerRank</p></a>
+                    <a href="https://www.linkedin.com/in/your-profile" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"><p>LinkedIn</p></a>
+                </div>
+                <p style="text-align: center; margin-top: 30px;">
+                    <i class="fas fa-envelope" style="color:#38bdf8;"></i> <a href="mailto:dikshakoppad@gmail.com" style="color:#38bdf8; text-decoration: none;">dikshakoppad@gmail.com</a>
+                </p>
+            </div>
+
+            <form action="https://formspree.io/f/dikshakoppad@gmail.com" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" name="name" placeholder="Your Name" required style="padding:12px; border-radius:8px; border:1px solid #1e293b; background:#111827; color:white;">
+                <input type="email" name="email" placeholder="Your Email" required style="padding:12px; border-radius:8px; border:1px solid #1e293b; background:#111827; color:white;">
+                <textarea name="message" rows="5" placeholder="Your Message" required style="padding:12px; border-radius:8px; border:1px solid #1e293b; background:#111827; color:white;"></textarea>
+                <button type="submit" style="background:#38bdf8; color:#020617; padding:12px; border-radius:8px; border:none; font-weight:600; cursor:pointer; transition: 0.3s;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Diksha Koppad Portfolio | Built with ❤️ by Diksha</p>
+    </footer>
+
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60 },
+                size: { value: 3 },
+                move: { speed: 2 },
+                line_linked: { enable: true, color: "#38bdf8" },
+                color: { value: "#38bdf8" }
+            }
+        });
+
+        const words = ["ML & Data Engineer", "Python Specialist", "DSA Problem Solver", "AI Researcher"];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+        function type() {
+            const current = words[wordIdx];
+            if (!isDeleting) charIdx++; else charIdx--;
+            document.getElementById("typing").textContent = current.substring(0, charIdx);
+            if (!isDeleting && charIdx === current.length) { isDeleting = true; setTimeout(type, 1500); return; }
+            if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; }
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
+        type();
+
+        document.getElementById("themeToggle").onclick = () => {
+            document.body.classList.toggle("light");
+            const btn = document.getElementById("themeToggle");
+            btn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+        };
+
+        fetch("https://api.github.com/users/dikshaikify/repos")
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById("repo-container");
+                if(data && Array.isArray(data)) {
+                    data.slice(0, 6).forEach(repo => {
+                        const card = document.createElement("div");
+                        card.className = "repo-card";
+                        card.innerHTML = `<h3>${repo.name}</h3><p>${repo.description || "Exciting project in development."}</p>
+                                          <a href="${repo.html_url}" target="_blank" style="color:#38bdf8; text-decoration:none; font-size:0.8rem;">View Source →</a>`;
+                        container.appendChild(card);
+                    });
+                }
+            });
+
+        // Updated Skill Radar Chart for ML/Data
+        new Chart(document.getElementById("skillChart"), {
+            type: 'radar',
+            data: {
+                labels: ["Python", "ML Models", "Deep Learning", "Data Viz", "SQL", "DSA (C++)"],
+                datasets: [{
+                    label: "Expertise %",
+                    data: [95, 88, 82, 90, 85, 90],
+                    backgroundColor: "rgba(56, 189, 248, 0.2)",
+                    borderColor: "#38bdf8",
+                    pointBackgroundColor: "#38bdf8"
+                }]
+            },
+            options: { 
+                scales: { 
+                    r: { 
+                        beginAtZero: true, 
+                        grid: { color: "#1e293b" },
+                        pointLabels: { color: "#38bdf8" }
+                    } 
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        VanillaTilt.init(document.querySelectorAll(".project-card"), { max: 15, speed: 400 });
+        ScrollReveal().reveal('section', { delay: 200, distance: '40px', origin: 'bottom' });
+    </script>
+</body>
+</html>
